@@ -1,0 +1,14 @@
+@tailwind base; @tailwind components; @tailwind utilities;
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: #100e0c; }
+body { font-family: var(--font-inter), sans-serif; }
+button { -webkit-tap-highlight-color: transparent; }
+.bg-scene { background-position: center; background-size: cover; animation: breathe 24s ease-in-out infinite alternate; }
+.grain { pointer-events:none; opacity:.10; mix-blend-mode:soft-light; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E"); }
+.control { display:grid; height:2.5rem; width:2.5rem; place-items:center; border-radius:999px; color:rgba(242,234,216,.65); transition:.2s; }
+.control:hover { color:#e8a33b; background:rgba(255,255,255,.05); }
+.player-enter { animation: playerUp .7s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes breathe { from { transform:scale(1.01) } to { transform:scale(1.07) } }
+@keyframes playerUp { from { opacity:0; transform:translateY(50px) } to { opacity:1; transform:none } }
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important } }
