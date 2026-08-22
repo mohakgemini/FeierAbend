@@ -9,6 +9,10 @@ button { -webkit-tap-highlight-color: transparent; }
 .control { display:grid; height:2.5rem; width:2.5rem; place-items:center; border-radius:999px; color:rgba(242,234,216,.65); transition:.2s; }
 .control:hover { color:#e8a33b; background:rgba(255,255,255,.05); }
 .player-enter { animation: playerUp .7s cubic-bezier(.2,.8,.2,1) both; }
+.is-oktoberfest .player-enter { background:linear-gradient(110deg,rgba(26,45,67,.94),rgba(101,61,38,.92)); border-color:rgba(202,221,238,.28); }
+.festive-glow { pointer-events:none; background:radial-gradient(circle at 14% 5%,rgba(255,191,91,.3),transparent 5%),radial-gradient(circle at 37% 0%,rgba(255,208,125,.24),transparent 4%),radial-gradient(circle at 62% 3%,rgba(255,191,91,.28),transparent 5%),radial-gradient(circle at 86% 0%,rgba(255,208,125,.25),transparent 4%); filter:blur(5px); }
+.is-oktoberfest .festive-glow { animation:lanternGlow 4s ease-in-out infinite alternate; }
 @keyframes breathe { from { transform:scale(1.01) } to { transform:scale(1.07) } }
 @keyframes playerUp { from { opacity:0; transform:translateY(50px) } to { opacity:1; transform:none } }
+@keyframes lanternGlow { from { opacity:.45 } to { opacity:.78 } }
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important } }
