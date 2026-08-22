@@ -1,5 +1,8 @@
 name: Deploy to GitHub Pages
 
+env:
+  NEXT_PUBLIC_CUSTOM_DOMAIN: "true"
+
 on:
   push:
     branches: [master]

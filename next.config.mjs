@@ -1,5 +1,6 @@
 const repositoryName = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "";
-const isProjectPages = process.env.GITHUB_ACTIONS === "true" && !repositoryName.endsWith(".github.io");
+const hasCustomDomain = process.env.NEXT_PUBLIC_CUSTOM_DOMAIN === "true";
+const isProjectPages = process.env.GITHUB_ACTIONS === "true" && !repositoryName.endsWith(".github.io") && !hasCustomDomain;
 const basePath = isProjectPages ? `/${repositoryName}` : "";
 
 /** @type {import('next').NextConfig} */
