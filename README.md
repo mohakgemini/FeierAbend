@@ -4,7 +4,7 @@ A nostalgic German internet-radio experience built with Next.js, TypeScript, Tai
 
 ## Live website
 
-**[Open Feierabend.fm on GitHub Pages](https://mohakgemini.github.io/FeierAbend/)**
+**[Open Feierabend.fm](https://feierabend.live/)**
 
 ## Features
 
