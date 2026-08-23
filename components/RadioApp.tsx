@@ -1,16 +1,17 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import MoodSelector from "./MoodSelector"; import RadioPlayer from "./RadioPlayer"; import VibeBadge from "./VibeBadge";
 import { vibes, type Track, type Vibe } from "@/data/vibes"; import { useYouTubePlayer } from "@/hooks/useYouTubePlayer";
 
 const randomIndex = (length:number, except=-1) => { if(length<=1) return 0; let n=except; while(n===except) n=Math.floor(Math.random()*length); return n };
-export default function RadioApp() { const [started]=useState(true), [selector,setSelector]=useState(false), [vibe,setVibe]=useState(vibes[1]), [trackIndex,setTrackIndex]=useState(0), [history,setHistory]=useState<number[]>([]), [listeners,setListeners]=useState(28), [fading,setFading]=useState(false), [time,setTime]=useState(""); const track:Track=vibe.tracks[trackIndex];
+export default function RadioApp({ initialVibe = vibes[1], initialSelectorOpen = false }: { initialVibe?: Vibe; initialSelectorOpen?: boolean }) { const router=useRouter(); const [started]=useState(true), [selector,setSelector]=useState(initialSelectorOpen), [vibe,setVibe]=useState(initialVibe), [trackIndex,setTrackIndex]=useState(0), [history,setHistory]=useState<number[]>([]), [listeners,setListeners]=useState(28), [fading,setFading]=useState(false), [time,setTime]=useState(""); const track:Track=vibe.tracks[trackIndex];
   const next = useCallback(() => { setTrackIndex(i => { const n=randomIndex(vibe.tracks.length,i); setHistory(h=>[...h.slice(-10),i]); return n }) }, [vibe]);
   const yt=useYouTubePlayer(next);
   useEffect(()=>{ setListeners(18+Math.floor(Math.random()*28)); const tick=()=>setTime(new Intl.DateTimeFormat("de-DE",{hour:"2-digit",minute:"2-digit"}).format(new Date())); tick(); const timer=setInterval(tick,10000); return()=>clearInterval(timer) },[]);
   useEffect(()=>{ if(started) vibe.playlistId ? yt.initPlaylist(vibe.playlistId) : yt.init(track.youtubeId) },[started,vibe.playlistId,track.youtubeId,yt.init,yt.initPlaylist]);
   const previous=()=>{ const last=history.at(-1); if(last===undefined) return next(); setHistory(h=>h.slice(0,-1)); setTrackIndex(last) };
-  const selectVibe=(v:Vibe)=>{ setFading(true); setTimeout(()=>{ setVibe(v); setTrackIndex(randomIndex(v.tracks.length)); setHistory([]); setSelector(false); setFading(false) },300) };
+  const selectVibe=(v:Vibe)=>{ setFading(true); setTimeout(()=>{ setVibe(v); setTrackIndex(randomIndex(v.tracks.length)); setHistory([]); setSelector(false); setFading(false); router.push(`/${v.id}`) },300) };
   useEffect(()=>{ const keys=(e:KeyboardEvent)=>{ if(!started||selector||["INPUT","BUTTON"].includes((e.target as HTMLElement).tagName)) return; if(e.code==="Space"){e.preventDefault(); yt.playing?yt.pause():yt.play()} if(e.key.toLowerCase()==="n"||e.key==="ArrowRight") vibe.playlistId?yt.nextVideo():next() }; window.addEventListener("keydown",keys); return()=>window.removeEventListener("keydown",keys) },[started,selector,yt,next,vibe.playlistId]);
   const shownTrack = vibe.playlistId && yt.videoData.video_id ? { youtubeId:yt.videoData.video_id, title:yt.videoData.title||"Deine Playlist", artist:yt.videoData.author||"YouTube", year:new Date().getFullYear() } : track;
   const goNext=()=>vibe.playlistId?yt.nextVideo():next(); const goPrevious=()=>vibe.playlistId?yt.previousVideo():previous(); const shuffle=()=>vibe.playlistId?yt.shufflePlaylist():next();
