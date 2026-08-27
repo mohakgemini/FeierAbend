@@ -4,7 +4,7 @@ export type Vibe = { id: string; title: string; cardSubtitle: string; subtitle: 
 export const sommerPlaylistId = "PLfP25--coVjg";
 export const defaultPlaylistId = "PL_PtigFDidUiP8J76EmrlVd6zsTAImE4V";
 export const oktoberfestPlaylistId = "RDEMXO_6Sdt6FaiHhnxNUF77Vw";
-export const nachtfahrtPlaylistId = "PLTJ1PnzCWyFw";
+export const nachtfahrtPlaylistId = "PLHg022HMFzFDMNp9xBGy3sARnqxaPl3PG";
 
 // Music comes exclusively from the playlists above. This neutral entry is shown
 // only for a moment while YouTube loads the current track metadata.
