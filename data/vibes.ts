@@ -1,7 +1,7 @@
 export type Track = { youtubeId: string; title: string; artist: string; year: number };
 export type Vibe = { id: string; title: string; cardSubtitle: string; subtitle: string; background: string; mobileBackground: string; playlistId?: string; seasonal?: "oktoberfest"; tracks: Track[] };
 
-export const sommerPlaylistId = "PLfP25--coVjg";
+export const sommerPlaylistId = "PL19SqEq2HQT3KLFZ-YfvA3m3t-mR5XlC7";
 export const defaultPlaylistId = "PL_PtigFDidUiP8J76EmrlVd6zsTAImE4V";
 export const oktoberfestPlaylistId = "RDEMXO_6Sdt6FaiHhnxNUF77Vw";
 export const nachtfahrtPlaylistId = "PLHg022HMFzFDMNp9xBGy3sARnqxaPl3PG";
