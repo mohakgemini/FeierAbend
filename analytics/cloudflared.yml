@@ -1,0 +1,7 @@
+tunnel: bee1465b-89b5-4522-a9db-8389696508bd
+credentials-file: /etc/cloudflared/credentials.json
+
+ingress:
+  - hostname: analytics.feierabend.live
+    service: http://umami:3000
+  - service: http_status:404

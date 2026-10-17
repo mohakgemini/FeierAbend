@@ -2,6 +2,8 @@ name: Deploy to GitHub Pages
 
 env:
   NEXT_PUBLIC_CUSTOM_DOMAIN: "true"
+  NEXT_PUBLIC_UMAMI_HOST: "https://analytics.feierabend.live"
+  NEXT_PUBLIC_UMAMI_WEBSITE_ID: "6b612bbd-8fea-4db2-9be4-616ecbba4594"
 
 on:
   push:
